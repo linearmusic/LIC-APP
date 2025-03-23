@@ -12,7 +12,7 @@ const adminSchema = new schema({
 const userSchema = new schema({
     name: {type: String,required: [true, "Name is required"]},
     dateofbirth: {type: Date,required: [true, "Date of birth is required"]},
-    policynumber: {type: Number,required: [true, "Policy number is required"]},
+    policynumber: {type: Number,required: [true, "Policy number is required"],unique:true},
     sumassured: {type: Number,required: [true, "Sum assured is required"]},
     TableAndTerms: {type: Number,required: [true, "Table and terms are required"]},
     ModeOfPayment: {type: String,required: [true, "Mode of payment is required"]},
