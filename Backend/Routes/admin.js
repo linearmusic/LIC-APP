@@ -26,8 +26,9 @@ const authMiddleware=require("../middlewares/authMiddleware");
 adminRouter.post("/signin", async (req, res) => {
     const { userId, password } = req.body;
     try {
-        // Check for hardcoded credentials
-        if (userId === process.env.userid && password === process.env.password) {
+        // Check for both production and demo credentials
+        if ((userId === process.env.userid && password === process.env.password) ||
+            (userId === process.env.DEMO_USERID && password === process.env.DEMO_PASSWORD)) {
             const token = jwt.sign({ 
                 id: 'admin',
                 role: 'admin'
