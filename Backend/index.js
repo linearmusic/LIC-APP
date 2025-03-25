@@ -1,14 +1,24 @@
-const express=require("express");
-const app=express();
-app.use(express.json());
-const jwt=require("jsonwebtoken");
-require('dotenv').config()
-const mongoose=require("mongoose");
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+require('dotenv').config();
 
-const {userRouter}=require("./Routes/users");
-const {adminRouter}=require("./Routes/admin");
-app.use("/user",userRouter);
-app.use("/admin",adminRouter);
+const app = express();
+app.use(cors({
+    origin: 'http://localhost:5173', // Your React app URL
+    credentials: true
+}));
+app.use(express.json());
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: "Something broke!" });
+});
+
+const { adminRouter } = require("./Routes/admin");
+
+app.use("/admin", adminRouter);
 
 async function main() {
     try {
@@ -18,7 +28,7 @@ async function main() {
             console.log(`Server running on port ${process.env.PORT}`);
         });
     } catch (err) {
-        console.error(" MongoDB connection failed:", err.message);
+        console.error("MongoDB connection failed:", err.message);
     }
 }
 main();
