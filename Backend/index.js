@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require('dotenv').config();
-
+PORT=process.env.PORT || 3000
 const app = express();
 app.use(cors({
     origin: 'http://localhost:5173', // Your React app URL
@@ -24,7 +24,7 @@ async function main() {
     try {
         await mongoose.connect(process.env.MONGODB_URL);
         console.log("Connected to MongoDB");
-        app.listen(process.env.PORT, () => {
+        app.listen(PORT, () => {
             console.log(`Server running on port ${process.env.PORT}`);
         });
     } catch (err) {
