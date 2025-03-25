@@ -7,7 +7,7 @@ PORT=process.env.PORT || 3000
 // Updated CORS configuration
 const allowedOrigins = [
     'http://localhost:5173',    // Local development
-    'https://lic-app.vercel.app', // Production frontend URL (update this to your actual domain)
+    'https://lic-app-eight.vercel.app' // Fixed: removed trailing slash
 ];
 
 const app = express();
