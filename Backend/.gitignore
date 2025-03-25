@@ -1,2 +1,6 @@
+# Backend ignores
+node_modules/
 .env
-node_modules
+logs/
+*.log
+.DS_Store

@@ -6,7 +6,11 @@ export default function useFetch(url){
 
     async function getDetails(){
         try {
-            let response=await fetch(url);
+            let response=await fetch(`${import.meta.env.VITE_API_URL}${url}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
             let json=await response.json();
             setFinalData(json);
         } catch (error) {
@@ -15,14 +19,12 @@ export default function useFetch(url){
             setLoading(false);
         }
     }
+
     useEffect(()=>{
         getDetails();
+        const interval = setInterval(getDetails, 10*1000);
+        return () => clearInterval(interval); // cleanup
     },[url]);
-    useEffect(()=>{
-        setInterval(getDetails,10*1000);//cleanup refetching the data
-    },[])
-    return {
-        FinalData,  // was finalData
-        Loading     // was loading
-    }
+
+    return { FinalData, Loading };
 }

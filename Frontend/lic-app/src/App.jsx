@@ -17,7 +17,7 @@ function LoginCard({ setIsAuthenticated }) {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch("http://localhost:3000/admin/signin", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/signin`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId, password }),

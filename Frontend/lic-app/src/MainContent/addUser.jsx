@@ -55,7 +55,7 @@ export default function AddUser() {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3000/admin/inputuserdata', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/inputuserdata`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -146,13 +146,24 @@ export default function AddUser() {
                                 { name: "policynumber", placeholder: "Policy Number", type: "text" },
                                 { name: "sumassured", placeholder: "Sum Assured", type: "number" },
                                 { name: "TableAndTerms", placeholder: "Table & Terms", type: "text" },
-                                { name: "ModeOfPayment", placeholder: "Mode of Payment", type: "text" },
                                 { name: "PremiumAmount", placeholder: "Premium Amount", type: "number" },
                                 { name: "MobileNo", placeholder: "Mobile Number", type: "tel" },
                                 { name: "Nominee", placeholder: "Nominee", type: "text" }
                             ].map(({ name, placeholder, type }) => (
                                 <input key={name} type={type} name={name} placeholder={placeholder} value={newUser[name]} onChange={handleChange} style={inputStyle} />
                             ))}
+                            
+                            <select 
+                                name="ModeOfPayment"
+                                value={newUser.ModeOfPayment}
+                                onChange={handleChange}
+                                style={inputStyle}
+                            >
+                                <option value="">Select Payment Mode</option>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Quarterly">Quarterly</option>
+                                <option value="Annually">Annually</option>
+                            </select>
 
                             {[
                                 { name: "dateofbirth", label: "Dob" },

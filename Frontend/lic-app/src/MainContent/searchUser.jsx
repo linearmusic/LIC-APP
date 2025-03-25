@@ -35,7 +35,7 @@ export default function SearchUser() {
             if (searchQuery.phone) queryParams.append('MobileNo', searchQuery.phone);
 
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:3000/admin/get-user?${queryParams}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/get-user?${queryParams}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

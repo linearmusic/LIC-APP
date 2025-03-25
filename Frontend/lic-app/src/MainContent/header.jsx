@@ -15,7 +15,7 @@ export default function Header({ setIsAuthenticated }) {  // Add setIsAuthentica
 
         try {
             // Make the logout API call in background
-            await fetch('http://localhost:3000/admin/logout', {
+            await fetch(`${import.meta.env.VITE_API_URL}/admin/logout`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
